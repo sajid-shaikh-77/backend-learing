@@ -1,0 +1,18 @@
+{
+  "name": "stream-backend",
+  "version": "1.0.0",
+  "description": "youtube like app ",
+  "keywords": [
+    "javascript",
+    "node",
+    "express",
+    "MERN"
+  ],
+  "license": "ISC",
+  "author": "Sajid Shaikh",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
