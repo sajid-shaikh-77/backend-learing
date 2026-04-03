@@ -1,1 +1,1 @@
-export const DB_NAME = "sajid"
+export const DB_NAME="streamapp"
