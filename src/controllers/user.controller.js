@@ -9,9 +9,9 @@ const generateAccessAndRefereshToken = async (userId) => {
         const user = await User.findById(userId)
         const accessToken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
-        user.refreshToken = refreshToken;
+        user.refreshToken = refreshToken
         await user.save({ validateBeforeSave: false })
-        return { accessToken, accessToken }
+        return { accessToken, refreshToken }
     } catch (error) {
         throw new ApiError(
             500,
@@ -99,7 +99,7 @@ const registerUser = asyncHandler(async (req, res) => {
     )
 })
 
-const loginUser = asyncHandler(async (res, req) => {
+const loginUser = asyncHandler(async (req, res) => {
     // data -> 
     // username or email check
     // find user exist or not
@@ -108,7 +108,7 @@ const loginUser = asyncHandler(async (res, req) => {
     // send Cookie
 
     const { email, username, password } = req.body
-    if (!username || !email) {
+    if (!username && !email) {
         throw new ApiError(400, "username or email is required");
     }
 
@@ -139,8 +139,8 @@ const loginUser = asyncHandler(async (res, req) => {
     }
 
     return res.status(200)
-        .cookie("accessToken", accessToken, options)
-        .cookie("refreshToken", refreshToken, options)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
         .json(
             new ApiResponse(
                 200,
@@ -171,17 +171,17 @@ const logoutUser = asyncHandler(async (req, res) => {
         secure: true
     }
     return res
-    .status(200)
-    .clearCookie("accessToken",options)
-    .clearCookie("refreshToken",options)
-    .json(
-        new ApiResponse(
-            200,
-            {
+        .status(200)
+        .clearCookie("accessToken", options)
+        .clearCookie("refreshToken", options)
+        .json(
+            new ApiResponse(
+                200,
+                {
 
-            },
-            "User logged out"
+                },
+                "User logged out"
+            )
         )
-    )
 })
 export { registerUser, loginUser, logoutUser }
